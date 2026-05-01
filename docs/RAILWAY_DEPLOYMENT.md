@@ -53,7 +53,7 @@ Set:
 
 ```text
 Root Directory: /backend
-Build Command: npm install
+Build Command: npm ci
 Start Command: npm run railway:start
 ```
 
@@ -68,6 +68,7 @@ FRONTEND_URL=https://YOUR_FRONTEND_DOMAIN
 ```
 
 The `npm run railway:start` command syncs Sequelize tables and then starts the API.
+The same settings are also committed in `backend/railway.json`, so Railway can pick them up automatically when this service root is `/backend`.
 
 After deployment, generate a public domain for the backend service. The API health check is:
 
@@ -83,9 +84,11 @@ Set:
 
 ```text
 Root Directory: /frontend
-Build Command: npm run build
+Build Command: npm ci && npm run build
 Start Command: npm start
 ```
+
+The same settings are also committed in `frontend/railway.json`, so Railway can pick them up automatically when this service root is `/frontend`.
 
 Add frontend environment variable:
 
