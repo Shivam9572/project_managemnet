@@ -1,10 +1,11 @@
 const app = require("./app");
 const env = require("./config/env");
 const { sequelize } = require("./models");
+const withDatabaseRetry = require("./utils/databaseRetry");
 
 async function start() {
   try {
-    await sequelize.authenticate();
+    await withDatabaseRetry(() => sequelize.authenticate(), "Database connection");
     app.listen(env.port, () => {
       console.log(`API running on http://localhost:${env.port}`);
     });

@@ -1,8 +1,9 @@
 const { sequelize } = require("../models");
+const withDatabaseRetry = require("./databaseRetry");
 
 async function syncDatabase() {
   try {
-    await sequelize.sync({ alter: false });
+    await withDatabaseRetry(() => sequelize.sync({ alter: false }), "Database sync");
     console.log("Database synced successfully.");
   } catch (error) {
     console.error("Database sync failed:", error);
