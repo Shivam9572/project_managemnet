@@ -5,6 +5,7 @@ This folder contains a complete project management web app:
 - `backend`: Node.js, Express.js, Sequelize, MySQL, JWT httpOnly-cookie auth, RBAC middleware.
 - `frontend`: Next.js App Router, TypeScript, Tailwind CSS, Axios, protected routes, role-based UI.
 - `docs`: SQL schema and REST API reference.
+- Railway deployment guide: `docs/RAILWAY_DEPLOYMENT.md`.
 
 ## Quick Start
 

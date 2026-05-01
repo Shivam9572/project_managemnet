@@ -1,11 +1,13 @@
 require("dotenv").config();
 
-const required = ["DB_HOST", "DB_NAME", "DB_USER", "JWT_SECRET"];
+const dbHost = process.env.DB_HOST || process.env.MYSQLHOST || "localhost";
+const dbPort = Number(process.env.DB_PORT || process.env.MYSQLPORT || 3306);
+const dbName = process.env.DB_NAME || process.env.MYSQLDATABASE || "project_management";
+const dbUser = process.env.DB_USER || process.env.MYSQLUSER || "root";
+const dbPassword = process.env.DB_PASSWORD || process.env.MYSQLPASSWORD || "";
 
-for (const key of required) {
-  if (!process.env[key]) {
-    console.warn(`Missing environment variable: ${key}`);
-  }
+if (!process.env.JWT_SECRET) {
+  console.warn("Missing environment variable: JWT_SECRET");
 }
 
 module.exports = {
@@ -13,11 +15,11 @@ module.exports = {
   port: Number(process.env.PORT || 5000),
   frontendUrl: process.env.FRONTEND_URL || "http://localhost:3000",
   db: {
-    host: process.env.DB_HOST || "localhost",
-    port: Number(process.env.DB_PORT || 3306),
-    name: process.env.DB_NAME || "project_management",
-    user: process.env.DB_USER || "root",
-    password: process.env.DB_PASSWORD || ""
+    host: dbHost,
+    port: dbPort,
+    name: dbName,
+    user: dbUser,
+    password: dbPassword
   },
   jwt: {
     secret: process.env.JWT_SECRET || "dev_only_change_me",
