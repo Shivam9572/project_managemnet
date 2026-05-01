@@ -1,9 +1,6 @@
 {
   "$schema": "https://railway.com/railway.schema.json",
-  "build": {
-    "builder": "NIXPACKS",
-    "buildCommand": "npm config set cache /tmp/.npm-cache --global && npm ci --no-audit --prefer-offline && npm run build"
-  },
+  
   "deploy": {
     "startCommand": "npm start",
     "restartPolicyType": "ON_FAILURE",
