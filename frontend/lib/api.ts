@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL:"https://projectmanagemnet-production.up.railway.app/api", // ✅ fallback hatao
+  baseURL:"https://projectmanagemnet-production.up.railway.app", // ✅ fallback hatao
   withCredentials: true,
   headers: {
     "Content-Type": "application/json"
