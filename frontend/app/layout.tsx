@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
 import "./globals.css";
-
-const ClientProviders = dynamic(() => import("@/components/ClientProviders"), { ssr: false });
+import ClientProviders from "@/components/ClientProviders";
 export const metadata: Metadata = {
   title: "ProjectFlow",
   description: "Full-stack project management app with RBAC"
