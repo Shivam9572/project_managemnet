@@ -1,7 +1,6 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
 import { api } from "@/lib/api";
 import type { Role, User } from "@/types/api";
 
@@ -29,7 +28,6 @@ const AuthContext = createContext<AuthContextValue | null>(null);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  const router = useRouter();
 
   const refresh = useCallback(async () => {
     try {
@@ -49,20 +47,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const login = useCallback(async (payload: Credentials) => {
     const { data } = await api.post<{ user: User }>("/auth/login", payload);
     setUser(data.user);
-    router.push("/dashboard");
-  }, [router]);
+    if (typeof window !== "undefined") window.location.assign("/dashboard");
+  }, []);
 
   const register = useCallback(async (payload: RegisterPayload) => {
     const { data } = await api.post<{ user: User }>("/auth/register", payload);
     setUser(data.user);
-    router.push("/dashboard");
-  }, [router]);
+    if (typeof window !== "undefined") window.location.assign("/dashboard");
+  }, []);
 
   const logout = useCallback(async () => {
     await api.post("/auth/logout");
     setUser(null);
-    router.push("/login");
-  }, [router]);
+    if (typeof window !== "undefined") window.location.assign("/login");
+  }, []);
 
   const value = useMemo(() => ({ user, loading, login, register, logout, refresh }), [user, loading, login, register, logout, refresh]);
 
