@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL, // ✅ fallback hatao
+  baseURL:"https://projectmanagemnet-production.up.railway.app/api", // ✅ fallback hatao
   withCredentials: true,
   headers: {
     "Content-Type": "application/json"
